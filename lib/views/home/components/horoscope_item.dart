@@ -29,7 +29,14 @@ class HoroscopeItem extends StatelessWidget {
         onPressed: () => {},
         child: Column(
           children: [
-            SvgPicture.asset("assets/images/burc/" + image + ".svg", width: 64, height: 64,),
+            SvgPicture.asset(
+              "assets/images/burc/" + image + ".svg",
+              width: 64,
+              height: 64,
+              placeholderBuilder: (BuildContext context) => Container(
+                  padding: const EdgeInsets.all(0.0),
+                  child: const CircularProgressIndicator()),
+            ),
             Divider(
               height: 12,
             ),

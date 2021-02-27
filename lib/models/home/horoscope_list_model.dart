@@ -4,16 +4,16 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class HoroscopeListModel {
-  final String horoscope_key;
+  final String horoscopeKey;
   final String name;
   final String image;
   final String between;
 
-  HoroscopeListModel({this.horoscope_key, this.name, this.image, this.between});
+  HoroscopeListModel({this.horoscopeKey, this.name, this.image, this.between});
 
   factory HoroscopeListModel.fromJson(Map<String, dynamic> json) {
     return HoroscopeListModel(
-      horoscope_key: json['horoscope_key'] as String,
+      horoscopeKey: json['horoscope_key'] as String,
       name: json['name'] as String,
       image: json['image'] as String,
       between: json['between'] as String,

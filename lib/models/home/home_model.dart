@@ -38,7 +38,6 @@ class HomeModel extends ChangeNotifier {
       _status = HomeModelStatus.Error;
     }
 
-
     _status = HomeModelStatus.Ended;
     notifyListeners();
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gunlukburc/commons/colors.dart';
 import 'package:gunlukburc/controllers/home/home_controller.dart';
 import 'package:gunlukburc/models/home/home_model.dart';
@@ -25,7 +26,7 @@ class _HomeLayoutState extends State<HomeLayout> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/background/bg.png"),
-            fit: BoxFit.contain,
+            fit: BoxFit.fill,
           ),
         ),
         child: SafeArea(
@@ -55,13 +56,21 @@ class _HomeLayoutState extends State<HomeLayout> {
                             alignment: Alignment.bottomCenter,
                             margin: EdgeInsets.all(5),
                             child: FlatButton(
-                              color: Colors.transparent,
+                              color: (this._isSelectedButton ==
+                                  viewModel
+                                      .horoscopes[index].horoscopeKey)
+                                  ? AppColors.DARKBLUE
+                                  : Colors.transparent,
                               key:
                                   Key(viewModel.horoscopes[index].horoscopeKey),
                               shape: RoundedRectangleBorder(
                                 side: BorderSide(
-                                  color: (this._isSelectedButton == viewModel.horoscopes[index].horoscopeKey) ? Colors.amber : Colors.transparent,
-                                  width: 1,
+                                  color: (this._isSelectedButton ==
+                                          viewModel
+                                              .horoscopes[index].horoscopeKey)
+                                      ? AppColors.ORANGE
+                                      : Colors.transparent,
+                                  width: 2,
                                   style: BorderStyle.solid,
                                 ),
                                 borderRadius: BorderRadius.circular(20),
@@ -98,7 +107,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18.0),
                               ),
-                              onPressed: () => { _isSelectedButton.isNotEmpty ? _detailPage(_isSelectedButton) : null},
+                              onPressed: () => {_detailPage(_isSelectedButton)},
                             ),
                           )
                         ],
@@ -118,9 +127,21 @@ class _HomeLayoutState extends State<HomeLayout> {
   }
 
   _detailPage(String isSelectedButton) {
-
-    print(isSelectedButton);
+    if (isSelectedButton.isEmpty) {
+      print(1);
+      Get.defaultDialog(
+        title: "Lütfen burç seçiniz.",
+        middleText: "Yorumunu okumak istediğiniz burcu seçin lütfen.",
+        backgroundColor: AppColors.WHITE,
+        radius: double.infinity
+      );
+    } else {
+      Get.defaultDialog(
+          title: "Seçilen Burç",
+          middleText: isSelectedButton,
+          backgroundColor: AppColors.WHITE,
+          radius: double.infinity
+      );
+    }
   }
-
 }
-

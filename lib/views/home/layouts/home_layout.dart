@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:gunlukburc/commons/colors.dart';
 import 'package:gunlukburc/controllers/home/home_controller.dart';
 import 'package:gunlukburc/models/home/home_model.dart';
+import 'package:gunlukburc/views/comment/comment_view.dart';
 import 'package:gunlukburc/views/home/components/home_header.dart';
 import 'package:gunlukburc/views/home/components/horoscope_item.dart';
 import 'package:provider/provider.dart';
@@ -136,12 +137,7 @@ class _HomeLayoutState extends State<HomeLayout> {
         radius: double.infinity
       );
     } else {
-      Get.defaultDialog(
-          title: "Seçilen Burç",
-          middleText: isSelectedButton,
-          backgroundColor: AppColors.WHITE,
-          radius: double.infinity
-      );
+      Get.to(CommentView());
     }
   }
 }

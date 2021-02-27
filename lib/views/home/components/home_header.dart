@@ -7,32 +7,37 @@ class HomeHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-          Text(
-            'Hoşgeldin',
-            style: TextStyle(
-                fontFamily: GoogleFonts.notoSans().fontFamily,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: AppColors.GREY),
+        Text(
+          'Hoşgeldin',
+          style: TextStyle(
+            fontFamily: GoogleFonts.notoSans().fontFamily,
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+            color: AppColors.GREY,
           ),
-          Text(
-            'Burcunu seçerek başla.',
-            style: TextStyle(
-                fontFamily: GoogleFonts.notoSans().fontFamily,
-                fontWeight: FontWeight.normal,
-                fontSize: 18,
-                color: AppColors.GREY),
+        ),
+        Text(
+          'Burcunu seçerek başla.',
+          style: TextStyle(
+            fontFamily: GoogleFonts.notoSans().fontFamily,
+            fontWeight: FontWeight.normal,
+            fontSize: 18,
+            color: AppColors.GREY,
           ),
-          Text(
-            'Burcunu Seç',
-            style: TextStyle(
-                fontFamily: GoogleFonts.notoSans().fontFamily,
-                fontWeight: FontWeight.bold,
-                fontSize: 28,
-                color: AppColors.WHITE),
+        ),
+        Text(''),
+        Text(
+          'Burcunu Seç',
+          style: TextStyle(
+            fontFamily: GoogleFonts.notoSans().fontFamily,
+            fontWeight: FontWeight.bold,
+            fontSize: 28,
+            color: AppColors.WHITE,
           ),
-        ],
+        ),
+      ],
     );
   }
 }

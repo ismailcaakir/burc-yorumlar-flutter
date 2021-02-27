@@ -18,12 +18,11 @@ class HomeLayout extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/background/bg.png"),
-            fit: BoxFit.fill,
+            fit: BoxFit.contain,
           ),
         ),
         child: SafeArea(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Expanded(
                 flex: 2,

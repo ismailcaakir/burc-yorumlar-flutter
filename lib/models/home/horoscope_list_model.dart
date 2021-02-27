@@ -22,8 +22,6 @@ class HoroscopeListModel {
 
   static List<HoroscopeListModel> parseData(String responseBody) {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
-
-    print(parsed);
     return parsed.map<HoroscopeListModel>((json) => HoroscopeListModel.fromJson(json)).toList();
   }
 

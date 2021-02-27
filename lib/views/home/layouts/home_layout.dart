@@ -6,7 +6,14 @@ import 'package:gunlukburc/views/home/components/home_header.dart';
 import 'package:gunlukburc/views/home/components/horoscope_item.dart';
 import 'package:provider/provider.dart';
 
-class HomeLayout extends StatelessWidget {
+class HomeLayout extends StatefulWidget {
+  @override
+  _HomeLayoutState createState() => _HomeLayoutState();
+}
+
+class _HomeLayoutState extends State<HomeLayout> {
+  String _isSelectedButton = "";
+
   @override
   Widget build(BuildContext context) {
     HomeController viewController = HomeController();
@@ -24,7 +31,8 @@ class HomeLayout extends StatelessWidget {
         child: SafeArea(
           child: (viewModel.status == HomeModelStatus.Loading)
               ? Center(
-                  child: CircularProgressIndicator(backgroundColor: AppColors.ORANGE),
+                  child: CircularProgressIndicator(
+                      backgroundColor: AppColors.ORANGE),
                 )
               : Column(
                   children: <Widget>[
@@ -44,11 +52,30 @@ class HomeLayout extends StatelessWidget {
                         itemCount: viewModel.horoscopes.length,
                         itemBuilder: (context, index) {
                           return Container(
-                            child: HoroscopeItem(
-                              keyId: viewModel.horoscopes[index].horoscopeKey,
-                              name: viewModel.horoscopes[index].name,
-                              image: viewModel.horoscopes[index].image,
-                              between: viewModel.horoscopes[index].between,
+                            alignment: Alignment.bottomCenter,
+                            margin: EdgeInsets.all(5),
+                            child: FlatButton(
+                              color: Colors.transparent,
+                              key:
+                                  Key(viewModel.horoscopes[index].horoscopeKey),
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: (this._isSelectedButton == viewModel.horoscopes[index].horoscopeKey) ? Colors.amber : Colors.transparent,
+                                  width: 1,
+                                  style: BorderStyle.solid,
+                                ),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              onPressed: () => {
+                                _selectHoroscope(
+                                    viewModel.horoscopes[index].horoscopeKey)
+                              },
+                              child: HoroscopeItem(
+                                keyId: viewModel.horoscopes[index].horoscopeKey,
+                                name: viewModel.horoscopes[index].name,
+                                image: viewModel.horoscopes[index].image,
+                                between: viewModel.horoscopes[index].between,
+                              ),
                             ),
                           );
                         },
@@ -71,7 +98,7 @@ class HomeLayout extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18.0),
                               ),
-                              onPressed: () => {},
+                              onPressed: () => { _isSelectedButton.isNotEmpty ? _detailPage(_isSelectedButton) : null},
                             ),
                           )
                         ],
@@ -83,4 +110,17 @@ class HomeLayout extends StatelessWidget {
       ),
     );
   }
+
+  _selectHoroscope(String horoscopeKey) {
+    setState(() {
+      this._isSelectedButton = horoscopeKey;
+    });
+  }
+
+  _detailPage(String isSelectedButton) {
+
+    print(isSelectedButton);
+  }
+
 }
+

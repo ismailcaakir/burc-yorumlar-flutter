@@ -19,36 +19,28 @@ class HoroscopeItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: FlatButton(
-        // shape: new RoundedRectangleBorder(
-        //   borderRadius: new BorderRadius.circular(30.0),
-        //   side: BorderSide(
-        //     color: Colors.amber
-        //   ),
-        // ),
-        onPressed: () => {},
-        child: Column(
-          children: [
-            SvgPicture.asset(
-              "assets/images/burc/" + image + ".svg",
-              width: 64,
-              height: 64,
-              placeholderBuilder: (BuildContext context) => Container(
-                  padding: const EdgeInsets.all(0.0),
-                  child: const CircularProgressIndicator()),
-            ),
-            Divider(
-              height: 12,
-            ),
-            Text(
-              name,
-              style: TextStyle(
-                  fontFamily: GoogleFonts.notoSans().fontFamily,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20),
-            )
-          ],
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            "assets/images/burc/" + image + ".svg",
+            width: 64,
+            height: 64,
+            placeholderBuilder: (BuildContext context) => Container(
+                padding: const EdgeInsets.all(0.0),
+                child: const CircularProgressIndicator()),
+          ),
+          Divider(
+            height: 12,
+          ),
+          Text(
+            name,
+            style: TextStyle(
+                fontFamily: GoogleFonts.notoSans().fontFamily,
+                fontWeight: FontWeight.bold,
+                fontSize: 20),
+          )
+        ],
       ),
     );
   }

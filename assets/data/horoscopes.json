@@ -1,0 +1,74 @@
+[
+  {
+    "horoscope_key": "koc",
+    "name": "Koç",
+    "image": "koc",
+    "between": ""
+  },
+  {
+    "horoscope_key": "boga",
+    "name": "Boğa",
+    "image": "boga",
+    "between": ""
+  },
+  {
+    "horoscope_key": "ikizler",
+    "name": "İkizler",
+    "image": "ikizler",
+    "between": ""
+  },
+  {
+    "horoscope_key": "yengec",
+    "name": "Yengeç",
+    "image": "yengec",
+    "between": ""
+  },
+  {
+    "horoscope_key": "aslan",
+    "name": "Aslan",
+    "image": "aslan",
+    "between": ""
+  },
+  {
+    "horoscope_key": "basak",
+    "name": "Başak",
+    "image": "basak",
+    "between": ""
+  },
+  {
+    "horoscope_key": "terazi",
+    "name": "Terazi",
+    "image": "terazi",
+    "between": ""
+  },
+  {
+    "horoscope_key": "akrep",
+    "name": "Akrep",
+    "image": "akrep",
+    "between": ""
+  },
+  {
+    "horoscope_key": "yay",
+    "name": "Yay",
+    "image": "yay",
+    "between": ""
+  },
+  {
+    "horoscope_key": "oglak",
+    "name": "Oğlak",
+    "image": "oglak",
+    "between": ""
+  },
+  {
+    "horoscope_key": "kova",
+    "name": "Kova",
+    "image": "kova",
+    "between": ""
+  },
+  {
+    "horoscope_key": "balik",
+    "name": "Balık",
+    "image": "balik",
+    "between": ""
+  }
+]

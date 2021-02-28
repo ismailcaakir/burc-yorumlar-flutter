@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gunlukburc/models/home/horoscope_list_model.dart';
+import 'package:http/http.dart' as http;
 
 enum CommentModelStatus {
   Ended,
@@ -16,18 +18,31 @@ class CommentModel extends ChangeNotifier {
   String get errorMessage => _errorMessage;
   CommentModelStatus get status => _status;
 
+  List<HoroscopeListModel> _horoscopes = [];
+  List<HoroscopeListModel> get horoscopes => _horoscopes;
+  String _selectedHoroscopeKey;
+  String get selectedHoroscopeKey => _selectedHoroscopeKey;
+
+
   CommentModel();
 
   CommentModel.instance() {
     getter();
   }
   
-  void getter() {
+  Future<void> getter() async {
     _status = CommentModelStatus.Loading;
     notifyListeners();
 
-    print(Get.arguments);
-    print("asd");
+    try {
+      _horoscopes = await HoroscopeListModel.fetchData(http.Client());
+      _selectedHoroscopeKey = Get.parameters as String;
+      print(_selectedHoroscopeKey);
+      _status = CommentModelStatus.Ended;
+    } catch (e) {
+      _errorMessage = e.toString();
+      _status = CommentModelStatus.Error;
+    }
 
     _status = CommentModelStatus.Ended;
     notifyListeners();

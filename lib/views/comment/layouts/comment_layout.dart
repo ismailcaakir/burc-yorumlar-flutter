@@ -37,7 +37,7 @@ class _CommentLayoutState extends State<CommentLayout> {
           child: Column(
             children: <Widget>[
               Expanded(
-                flex: 5,
+                flex: 7,
                 child: CommentHeader(),
               ),
               Expanded(
@@ -46,57 +46,58 @@ class _CommentLayoutState extends State<CommentLayout> {
                   color: AppColors.DARKBLUE,
                   child: Column(
                     children: <Widget>[
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: MediaQuery.of(context).size.height * 1,
-                          width: MediaQuery.of(context).size.width * 1,
-                          margin: EdgeInsets.only(right: 30, left: 30),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text(
-                                'Günlük',
-                                style: TextStyle(
-                                  color: AppColors.WHITE,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              Text(
-                                'Haftalık',
-                                style: TextStyle(
-                                  color: AppColors.WHITE,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              Text(
-                                'Aylık',
-                                style: TextStyle(
-                                  color: AppColors.WHITE,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              Text(
-                                'Yıllık',
-                                style: TextStyle(
-                                  color: AppColors.WHITE,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 6,
-                        child: Container(
-                          height: MediaQuery.of(context).size.height * 1,
-                          width: MediaQuery.of(context).size.width * 1,
-                          color: Colors.transparent,
-                          child: Text('1'),
-                        ),
-                      ),
+                      Text('')
+                      // Expanded(
+                      //   flex: 1,
+                      //   child: Container(
+                      //     alignment: Alignment.center,
+                      //     height: MediaQuery.of(context).size.height * 1,
+                      //     width: MediaQuery.of(context).size.width * 1,
+                      //     margin: EdgeInsets.only(right: 30, left: 30),
+                      //     child: Row(
+                      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //       children: <Widget>[
+                      //         Text(
+                      //           'Günlük',
+                      //           style: TextStyle(
+                      //             color: AppColors.WHITE,
+                      //             fontSize: 20,
+                      //           ),
+                      //         ),
+                      //         Text(
+                      //           'Haftalık',
+                      //           style: TextStyle(
+                      //             color: AppColors.WHITE,
+                      //             fontSize: 20,
+                      //           ),
+                      //         ),
+                      //         Text(
+                      //           'Aylık',
+                      //           style: TextStyle(
+                      //             color: AppColors.WHITE,
+                      //             fontSize: 20,
+                      //           ),
+                      //         ),
+                      //         Text(
+                      //           'Yıllık',
+                      //           style: TextStyle(
+                      //             color: AppColors.WHITE,
+                      //             fontSize: 20,
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                      // Expanded(
+                      //   flex: 6,
+                      //   child: Container(
+                      //     height: MediaQuery.of(context).size.height * 1,
+                      //     width: MediaQuery.of(context).size.width * 1,
+                      //     color: Colors.transparent,
+                      //     child: Text('1'),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

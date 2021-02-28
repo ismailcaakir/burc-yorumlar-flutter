@@ -54,11 +54,7 @@ class _CommentHeaderState extends State<CommentHeader> {
   Widget build(BuildContext context) {
     final viewModel = Provider.of<CommentModel>(context);
 
-    // if(firstOpen == true) {
-    //   viewModel.getApiComment(selectedHoroscopeKey, 'Günlük');
-    //   firstOpen = false;
-    // } else {
-    // }
+
 
     horoscopeCarouselPageChanged(int index, CarouselPageChangedReason reason) {
       setState(() {

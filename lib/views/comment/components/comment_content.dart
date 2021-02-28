@@ -40,7 +40,7 @@ class _CommentContentState extends State<CommentContent> {
                     Text(
                       viewModel.commentFromApi.first.yorum,
                       style: TextStyle(
-                        color: AppColors.WHITE,
+                        color: AppColors.AMBER_1,
                         fontSize: 16,
                         fontWeight: FontWeight.w100,
                       ),

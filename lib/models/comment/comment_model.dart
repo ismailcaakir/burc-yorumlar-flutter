@@ -29,9 +29,6 @@ class CommentModel extends ChangeNotifier {
   String _selectedHoroscopeKey;
   String get selectedHoroscopeKey => _selectedHoroscopeKey;
 
-  set selectedHoroscopeKey(String value) {
-    _selectedHoroscopeKey = value;
-  }
 
   String _pressedButtonType = 'Günlük';
   String get pressedButtonType => _pressedButtonType;

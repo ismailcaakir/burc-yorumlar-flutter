@@ -1,8 +1,6 @@
 import 'dart:async';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gunlukburc/commons/colors.dart';
 import 'package:gunlukburc/models/comment/comment_model.dart';
@@ -40,7 +38,7 @@ class _CommentHeaderState extends State<CommentHeader> {
     pageTitle = widget.pageTitle;
     selectedHoroscopeKey = widget.selectedHoroscopeKey;
     horoscopeListModel = widget.horoscopeListModel;
-    firstOpen = true;
+    bool _checkConfiguration() => true;
 
     horoscopeListModel.asMap().forEach((key, value) {
       if (selectedHoroscopeKey == value.horoscopeKey) {
@@ -48,20 +46,26 @@ class _CommentHeaderState extends State<CommentHeader> {
         pageTitle = value.name;
       }
     });
+
+    if (_checkConfiguration()) {
+      Future.delayed(Duration.zero,() {
+        final viewModel = Provider.of<CommentModel>(context, listen: false);
+        print('girdi');
+        viewModel.getApiComment(selectedHoroscopeKey, 'Günlük');
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<CommentModel>(context);
 
-
-
     horoscopeCarouselPageChanged(int index, CarouselPageChangedReason reason) {
       setState(() {
         this.horoscopeListModel.asMap().forEach((key, value) {
           if (index == key) {
             pageTitle = value.name;
-            viewModel.selectedHoroscopeKey = value.horoscopeKey;
+            viewModel.setSelectedHoroscopeKey = value.horoscopeKey;
             viewModel.getApiComment(value.horoscopeKey, 'Günlük');
           }
         });

@@ -41,6 +41,7 @@ class CommentApiModel {
           break;
       }
     }
+    print(endpoint);
     final response = await client.get(endpoint);
     return compute(parseData, response.body);
   }

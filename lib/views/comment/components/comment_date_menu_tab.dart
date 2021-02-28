@@ -23,6 +23,7 @@ class _CommentDateMenuTabState extends State<CommentDateMenuTab> {
     final viewModel = Provider.of<CommentModel>(context);
 
     _getCommentApiFromType(int index, String type) {
+      viewModel.setPressedButtonType = type;
       viewModel.getApiComment(viewModel.selectedHoroscopeKey, type);
     }
 

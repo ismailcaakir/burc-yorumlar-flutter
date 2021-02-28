@@ -48,25 +48,24 @@ class _CommentHeaderState extends State<CommentHeader> {
         pageTitle = value.name;
       }
     });
-
   }
 
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<CommentModel>(context);
 
-    if(firstOpen == true) {
-      viewModel.getApiComment(selectedHoroscopeKey, 'Günlük');
-      firstOpen = false;
-    } else {
-    }
+    // if(firstOpen == true) {
+    //   viewModel.getApiComment(selectedHoroscopeKey, 'Günlük');
+    //   firstOpen = false;
+    // } else {
+    // }
 
     horoscopeCarouselPageChanged(int index, CarouselPageChangedReason reason) {
       setState(() {
         this.horoscopeListModel.asMap().forEach((key, value) {
           if (index == key) {
-            this.pageTitle = value.name;
-            this.selectedHoroscopeKey = value.horoscopeKey;
+            pageTitle = value.name;
+            viewModel.selectedHoroscopeKey = value.horoscopeKey;
             viewModel.getApiComment(value.horoscopeKey, 'Günlük');
           }
         });
@@ -114,16 +113,19 @@ class _CommentHeaderState extends State<CommentHeader> {
                     builder: (BuildContext context) {
                       return Container(
                         margin: EdgeInsets.all(0),
-                        child: Column(
+                        child: SingleChildScrollView(
+                          child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               SvgPicture.asset(
                                 'assets/images/burc/' + i.image + '.svg',
-                                height: selectedHoroscopeKey == i.horoscopeKey
-                                    ? 96
+                                height: viewModel.selectedHoroscopeKey ==
+                                        i.horoscopeKey
+                                    ? 120
                                     : 64,
-                                width: selectedHoroscopeKey == i.horoscopeKey
-                                    ? 96
+                                width: viewModel.selectedHoroscopeKey ==
+                                        i.horoscopeKey
+                                    ? 120
                                     : 64,
                                 placeholderBuilder: (BuildContext context) =>
                                     Container(
@@ -131,14 +133,9 @@ class _CommentHeaderState extends State<CommentHeader> {
                                   child: const CircularProgressIndicator(),
                                 ),
                               ),
-                              Text(
-                                i.name,
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  color: AppColors.GREY,
-                                ),
-                              )
-                            ]),
+                            ],
+                          ),
+                        ),
                       );
                     },
                   );

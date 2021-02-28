@@ -31,7 +31,6 @@ class CommentApiModel {
     if (type.isNotEmpty) {
       switch (type.toLowerCase()) {
         case 'haftalık':
-          print('girdiii');
           endpoint = endpoint + '/haftalik';
           break;
         case 'aylık':
@@ -42,6 +41,7 @@ class CommentApiModel {
           break;
       }
     }
+
     print(endpoint);
     final response = await client.get(endpoint);
     return compute(parseData, response.body);

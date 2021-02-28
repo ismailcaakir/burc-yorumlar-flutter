@@ -23,58 +23,36 @@ class _CommentContentState extends State<CommentContent> {
           right: 20,
         ),
         child: SingleChildScrollView(
-          child:
-          (viewModel.commentApiStatus == CommentModelStatus.Ended) ? Column(
-            children: <Widget>[
-              Text(
-                viewModel.commentFromApi.first.mottosu,
-                style: TextStyle(
-                  color: AppColors.WHITE,
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Divider(
-                height: 30,
-              ),
-              Text(
-                viewModel.commentFromApi.first.yorum,
-                style: TextStyle(
-                  color: AppColors.WHITE,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w100,
-                ),
-              ),
-              Divider(
-                height: 20,
-              ),
-              ButtonTheme(
-                height: 40,
-                minWidth:
-                MediaQuery.of(context).size.width *
-                    0.88,
-                child: RaisedButton(
-                  child: Text(
-                    'Paylaş',
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: AppColors.WHITE),
+          child: (viewModel.commentApiStatus == CommentModelStatus.Ended)
+              ? Column(
+                  children: <Widget>[
+                    Text(
+                      viewModel.commentFromApi.first.mottosu,
+                      style: TextStyle(
+                        color: AppColors.WHITE,
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Divider(
+                      height: 30,
+                    ),
+                    Text(
+                      viewModel.commentFromApi.first.yorum,
+                      style: TextStyle(
+                        color: AppColors.WHITE,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w100,
+                      ),
+                    ),
+                    Divider(height: 80,)
+                  ],
+                )
+              : Container(
+                  child: Center(
+                    child: CircularProgressIndicator(),
                   ),
-                  color: AppColors.ORANGE,
-                  shape: RoundedRectangleBorder(
-                    borderRadius:
-                    BorderRadius.circular(18.0),
-                  ),
-                  onPressed: () => {},
                 ),
-              ),
-              Divider(
-                height: 40,
-              ),
-            ],
-          ) : Container(child: Center(
-            child: CircularProgressIndicator(),
-          ),),
         ),
       ),
     );

@@ -24,9 +24,6 @@ class _CommentDateMenuTabState extends State<CommentDateMenuTab> {
     final viewModel = Provider.of<CommentModel>(context);
 
     _getCommentApiFromType(int index, String type) {
-      setState(() {
-        _pressedButtonIndex = index;
-      });
       viewModel.getApiComment(viewModel.selectedHoroscopeKey, type);
     }
 
@@ -44,7 +41,7 @@ class _CommentDateMenuTabState extends State<CommentDateMenuTab> {
               borderRadius: BorderRadius.circular(5.0),
             ),
             child: FlatButton(
-              color: index == this._pressedButtonIndex ? AppColors.ORANGE : Colors.transparent,
+              color: buttonType[index].toLowerCase() == viewModel.pressedButtonType.toLowerCase() ? AppColors.ORANGE : Colors.transparent,
               onPressed: () => {_getCommentApiFromType(index, buttonType[index])},
               child: Text(
                 turkish.toTitleCase(buttonType[index]),

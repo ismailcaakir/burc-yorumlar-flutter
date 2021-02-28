@@ -15,6 +15,7 @@ class CommentModel extends ChangeNotifier {
   CommentModelStatus _commentApiStatus;
   String _errorCode;
   String _errorMessage;
+
   String get errorCode => _errorCode;
   String get errorMessage => _errorMessage;
   CommentModelStatus get status => _status;
@@ -26,7 +27,10 @@ class CommentModel extends ChangeNotifier {
   String _selectedHoroscopeKey;
   String get selectedHoroscopeKey => _selectedHoroscopeKey;
 
-  set selectedHoroscopeKey(String value) {
+  String _pressedButtonType = 'Günlük';
+  String get pressedButtonType => _pressedButtonType;
+
+  set setSelectedHoroscopeKey(String value) {
     _selectedHoroscopeKey = value;
   }
 
@@ -62,6 +66,7 @@ class CommentModel extends ChangeNotifier {
     notifyListeners();
 
     try {
+      _pressedButtonType = type;
       _commentFromApi =
           await CommentApiModel.fetchData(http.Client(), horoscopeKey, type);
       _commentApiStatus = CommentModelStatus.Ended;
@@ -103,4 +108,5 @@ class CommentModel extends ChangeNotifier {
     _status = CommentModelStatus.Ended;
     notifyListeners();
   }
+
 }

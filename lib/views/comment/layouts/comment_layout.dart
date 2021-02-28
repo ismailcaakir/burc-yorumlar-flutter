@@ -21,7 +21,6 @@ class _CommentLayoutState extends State<CommentLayout> {
     CommentController viewController = CommentController();
     final viewModel = Provider.of<CommentModel>(context);
 
-    print(viewModel.horoscopes);
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height * 1,

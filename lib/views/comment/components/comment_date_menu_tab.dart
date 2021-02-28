@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gunlukburc/commons/colors.dart';
-// import 'package:gunlukburc/models/comment/comment_model.dart';
-// import 'package:provider/provider.dart';
+import 'package:gunlukburc/models/comment/comment_model.dart';
+import 'package:provider/provider.dart';
 import 'package:turkish/turkish.dart';
 
 class CommentDateMenuTab extends StatefulWidget {
@@ -17,13 +17,18 @@ class _CommentDateMenuTabState extends State<CommentDateMenuTab> {
     'Haftalık',
     'Aylık',
     'Yıllık',
-    'Kariyer',
-    'Aşk'
   ];
 
   @override
   Widget build(BuildContext context) {
-    // final viewModel = Provider.of<CommentModel>(context);
+    final viewModel = Provider.of<CommentModel>(context);
+
+    _getCommentApiFromType(int index, String type) {
+      setState(() {
+        _pressedButtonIndex = index;
+      });
+      viewModel.getApiComment(viewModel.selectedHoroscopeKey, type);
+    }
 
     return Container(
       alignment: Alignment.center,
@@ -40,7 +45,7 @@ class _CommentDateMenuTabState extends State<CommentDateMenuTab> {
             ),
             child: FlatButton(
               color: index == this._pressedButtonIndex ? AppColors.ORANGE : Colors.transparent,
-              onPressed: () => {_getCommentApiFromType(index)},
+              onPressed: () => {_getCommentApiFromType(index, buttonType[index])},
               child: Text(
                 turkish.toTitleCase(buttonType[index]),
                 style: TextStyle(
@@ -55,9 +60,5 @@ class _CommentDateMenuTabState extends State<CommentDateMenuTab> {
     );
   }
 
-  _getCommentApiFromType(int index) {
-    setState(() {
-      _pressedButtonIndex = index;
-    });
-  }
+
 }

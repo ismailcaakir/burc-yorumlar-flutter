@@ -11,14 +11,18 @@ class CommentHeader extends StatefulWidget {
   final String selectedHoroscopeKey;
   final List<HoroscopeListModel> horoscopeListModel;
 
-  const CommentHeader({Key key, this.pageTitle, this.selectedHoroscopeKey, this.horoscopeListModel}) : super(key: key);
+  const CommentHeader(
+      {Key key,
+      this.pageTitle,
+      this.selectedHoroscopeKey,
+      this.horoscopeListModel})
+      : super(key: key);
 
   @override
   _CommentHeaderState createState() => _CommentHeaderState();
 }
 
 class _CommentHeaderState extends State<CommentHeader> {
-
   String pageTitle;
   String selectedHoroscopeKey;
   int selectedHoroscopeCarouselIndex = 0;
@@ -34,7 +38,7 @@ class _CommentHeaderState extends State<CommentHeader> {
     horoscopeListModel = widget.horoscopeListModel;
 
     horoscopeListModel.asMap().forEach((key, value) {
-      if(selectedHoroscopeKey == value.horoscopeKey) {
+      if (selectedHoroscopeKey == value.horoscopeKey) {
         selectedHoroscopeCarouselIndex = key;
         pageTitle = value.name;
       }
@@ -43,7 +47,20 @@ class _CommentHeaderState extends State<CommentHeader> {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = Provider.of<CommentModel>(context);
 
+    horoscopeCarouselPageChanged(int index, CarouselPageChangedReason reason) {
+      setState(() {
+        this.horoscopeListModel.asMap().forEach((key, value) {
+          if (index == key) {
+            this.pageTitle = value.name;
+            this.selectedHoroscopeKey = value.horoscopeKey;
+            viewModel.selectedHoroscopeKey = value.horoscopeKey;
+            viewModel.getApiComment(value.horoscopeKey);
+          }
+        });
+      });
+    }
 
     return Container(
       color: Colors.black38,
@@ -59,10 +76,9 @@ class _CommentHeaderState extends State<CommentHeader> {
                   Text(
                     this.pageTitle.toString(),
                     style: TextStyle(
-                      color: AppColors.WHITE,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold
-                    ),
+                        color: AppColors.WHITE,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold),
                   )
                 ],
               ),
@@ -92,8 +108,17 @@ class _CommentHeaderState extends State<CommentHeader> {
                             children: <Widget>[
                               SvgPicture.asset(
                                 'assets/images/burc/' + i.image + '.svg',
-                                height: selectedHoroscopeKey == i.horoscopeKey ? 120 : 84,
-                                width: selectedHoroscopeKey == i.horoscopeKey ? 120 : 84,
+                                height: this.selectedHoroscopeKey == i.horoscopeKey
+                                    ? 96
+                                    : 64,
+                                width: this.selectedHoroscopeKey == i.horoscopeKey
+                                    ? 96
+                                    : 64,
+                                placeholderBuilder: (BuildContext context) =>
+                                    Container(
+                                  padding: const EdgeInsets.all(0.0),
+                                  child: const CircularProgressIndicator(),
+                                ),
                               ),
                               Text(
                                 i.name,
@@ -116,7 +141,6 @@ class _CommentHeaderState extends State<CommentHeader> {
               children: [
                 Container(
                   height: 50,
-                  width: 140,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: AppColors.DARKBLUE_5,
@@ -131,19 +155,27 @@ class _CommentHeaderState extends State<CommentHeader> {
                         height: 29,
                         width: 29,
                       ),
-                      Text(
-                        'Jüpiter',
-                        style: TextStyle(
-                          color: AppColors.WHITE,
-                          fontSize: 20,
-                        ),
-                      )
+                      Container(width: 10, child: Text(''),),
+                      (viewModel.commentApiStatus == CommentModelStatus.Ended)
+                          ? Text(
+                              viewModel.commentFromApi.first.gezegeni,
+                              style: TextStyle(
+                                color: AppColors.WHITE,
+                                fontSize: 20,
+                              ),
+                            )
+                          : Text(
+                              ' ## ',
+                              style: TextStyle(
+                                color: AppColors.WHITE,
+                                fontSize: 20,
+                              ),
+                            ),
                     ],
                   ),
                 ),
                 Container(
                   height: 50,
-                  width: 140,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: AppColors.DARKBLUE_5,
@@ -152,15 +184,27 @@ class _CommentHeaderState extends State<CommentHeader> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      SvgPicture.asset('assets/images/icon/toprak.svg',
-                          height: 29, width: 29),
-                      Text(
-                        'Toprak',
+                      SvgPicture.asset(
+                        'assets/images/icon/toprak.svg',
+                        height: 29,
+                        width: 29,
+                      ),
+                      Container(width: 10, child: Text(''),),
+                      (viewModel.commentApiStatus == CommentModelStatus.Ended)
+                          ? Text(
+                        viewModel.commentFromApi.first.elementi,
                         style: TextStyle(
                           color: AppColors.WHITE,
                           fontSize: 20,
                         ),
                       )
+                          : Text(
+                        ' ## ',
+                        style: TextStyle(
+                          color: AppColors.WHITE,
+                          fontSize: 20,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -170,15 +214,5 @@ class _CommentHeaderState extends State<CommentHeader> {
         ],
       ),
     );
-  }
-
-  horoscopeCarouselPageChanged(int index, CarouselPageChangedReason reason) {
-    setState(() {
-      this.horoscopeListModel.asMap().forEach((key, value) {
-        if(index == key) {
-          this.pageTitle = value.name;
-        }
-      });
-    });
   }
 }

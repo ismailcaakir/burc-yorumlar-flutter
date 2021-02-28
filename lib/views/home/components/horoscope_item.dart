@@ -27,8 +27,9 @@ class HoroscopeItem extends StatelessWidget {
             width: 64,
             height: 64,
             placeholderBuilder: (BuildContext context) => Container(
-                padding: const EdgeInsets.all(0.0),
-                child: const CircularProgressIndicator()),
+              padding: const EdgeInsets.all(0.0),
+              child: const CircularProgressIndicator(),
+            ),
           ),
           Divider(
             height: 12,

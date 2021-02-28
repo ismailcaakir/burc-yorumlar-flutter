@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gunlukburc/commons/colors.dart';
-import 'package:gunlukburc/controllers/home/home_controller.dart';
+// import 'package:gunlukburc/controllers/home/home_controller.dart';
 import 'package:gunlukburc/models/home/home_model.dart';
 import 'package:gunlukburc/views/comment/comment_view.dart';
 import 'package:gunlukburc/views/home/components/home_header.dart';
@@ -18,7 +18,7 @@ class _HomeLayoutState extends State<HomeLayout> {
 
   @override
   Widget build(BuildContext context) {
-    HomeController viewController = HomeController();
+    // HomeController viewController = HomeController();
     final viewModel = Provider.of<HomeModel>(context);
     return Scaffold(
       body: Container(
@@ -129,7 +129,6 @@ class _HomeLayoutState extends State<HomeLayout> {
 
   _detailPage(String isSelectedButton) {
     if (isSelectedButton.isEmpty) {
-      print(1);
       Get.defaultDialog(
         title: "Lütfen burç seçiniz.",
         middleText: "Yorumunu okumak istediğiniz burcu seçin lütfen.",
@@ -137,7 +136,8 @@ class _HomeLayoutState extends State<HomeLayout> {
         radius: double.infinity
       );
     } else {
-      Get.to(CommentView());
+      var arguments = isSelectedButton;
+      Get.to(() => CommentView(), arguments: arguments);
     }
   }
 }

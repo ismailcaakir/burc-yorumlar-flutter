@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 enum CommentModelStatus {
   Ended,
@@ -18,14 +19,15 @@ class CommentModel extends ChangeNotifier {
   CommentModel();
 
   CommentModel.instance() {
-    //TODO Add code here
+    getter();
   }
   
   void getter() {
     _status = CommentModelStatus.Loading;
     notifyListeners();
 
-    //TODO Add code here
+    print(Get.arguments);
+    print("asd");
 
     _status = CommentModelStatus.Ended;
     notifyListeners();

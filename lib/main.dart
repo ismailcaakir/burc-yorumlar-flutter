@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.amber,
         textTheme: GoogleFonts.notoSansTextTheme(),
         colorScheme: ColorScheme.dark(),
+        backgroundColor: Colors.transparent,
         primaryColor: AppColors.ORANGE,
         appBarTheme: AppBarTheme(
           color: AppColors.WHITE,

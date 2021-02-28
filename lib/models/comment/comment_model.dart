@@ -36,7 +36,7 @@ class CommentModel extends ChangeNotifier {
 
     try {
       _horoscopes = await HoroscopeListModel.fetchData(http.Client());
-      _selectedHoroscopeKey = Get.parameters as String;
+      _selectedHoroscopeKey = Get.arguments as String;
       print(_selectedHoroscopeKey);
       _status = CommentModelStatus.Ended;
     } catch (e) {

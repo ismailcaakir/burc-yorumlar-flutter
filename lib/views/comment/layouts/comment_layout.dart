@@ -1,13 +1,12 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:gunlukburc/commons/colors.dart';
+import 'package:gunlukburc/views/comment/components/comment_content.dart';
 
-// import 'package:gunlukburc/controllers/comment/comment_controller.dart';
+import 'package:gunlukburc/controllers/comment/comment_controller.dart';
 import 'package:gunlukburc/models/comment/comment_model.dart';
-import 'package:gunlukburc/views/comment/components/comment_header.dart';
 import 'package:provider/provider.dart';
+import 'package:gunlukburc/views/comment/components/comment_date_menu_tab.dart';
+import 'package:gunlukburc/views/comment/components/comment_header.dart';
 
 class CommentLayout extends StatefulWidget {
   @override
@@ -19,10 +18,10 @@ class _CommentLayoutState extends State<CommentLayout> {
 
   @override
   Widget build(BuildContext context) {
-    // CommentController viewController = CommentController();
+    CommentController viewController = CommentController();
     final viewModel = Provider.of<CommentModel>(context);
-    CarouselController buttonCarouselController = CarouselController();
 
+    print(viewModel.horoscopes);
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height * 1,
@@ -33,78 +32,54 @@ class _CommentLayoutState extends State<CommentLayout> {
             fit: BoxFit.fill,
           ),
         ),
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                flex: 7,
-                child: CommentHeader(),
-              ),
-              Expanded(
-                flex: 10,
-                child: Container(
-                  color: AppColors.DARKBLUE,
-                  child: Column(
-                    children: <Widget>[
-                      Text('')
-                      // Expanded(
-                      //   flex: 1,
-                      //   child: Container(
-                      //     alignment: Alignment.center,
-                      //     height: MediaQuery.of(context).size.height * 1,
-                      //     width: MediaQuery.of(context).size.width * 1,
-                      //     margin: EdgeInsets.only(right: 30, left: 30),
-                      //     child: Row(
-                      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //       children: <Widget>[
-                      //         Text(
-                      //           'Günlük',
-                      //           style: TextStyle(
-                      //             color: AppColors.WHITE,
-                      //             fontSize: 20,
-                      //           ),
-                      //         ),
-                      //         Text(
-                      //           'Haftalık',
-                      //           style: TextStyle(
-                      //             color: AppColors.WHITE,
-                      //             fontSize: 20,
-                      //           ),
-                      //         ),
-                      //         Text(
-                      //           'Aylık',
-                      //           style: TextStyle(
-                      //             color: AppColors.WHITE,
-                      //             fontSize: 20,
-                      //           ),
-                      //         ),
-                      //         Text(
-                      //           'Yıllık',
-                      //           style: TextStyle(
-                      //             color: AppColors.WHITE,
-                      //             fontSize: 20,
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
-                      // Expanded(
-                      //   flex: 6,
-                      //   child: Container(
-                      //     height: MediaQuery.of(context).size.height * 1,
-                      //     width: MediaQuery.of(context).size.width * 1,
-                      //     color: Colors.transparent,
-                      //     child: Text('1'),
-                      //   ),
-                      // ),
-                    ],
-                  ),
-                ),
+        child: (viewModel.status == CommentModelStatus.Loading)
+            ? Center(
+                child: CircularProgressIndicator(),
               )
-            ],
-          ),
-        ),
+            : Container(
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 7,
+                      child: CommentHeader(
+                        pageTitle: viewModel.selectedHoroscopeKey,
+                        horoscopeListModel: viewModel.horoscopes,
+                        selectedHoroscopeKey: viewModel.selectedHoroscopeKey,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 10,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            stops: [0.1, 0.4, 1, 1],
+                            colors: [
+                              AppColors.DARKBLUE,
+                              AppColors.DARKBLUE_5,
+                              Colors.transparent,
+                              Colors.transparent,
+                            ],
+                          ),
+                        ),
+                        child: Column(
+                          children: <Widget>[
+                            Expanded(
+                              flex: 2,
+                              child: CommentDateMenuTab(),
+                            ),
+                            Expanded(
+                              flex: 10,
+                              child: CommentContent(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
       ),
     );
   }

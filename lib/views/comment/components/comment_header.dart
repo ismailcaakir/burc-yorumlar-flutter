@@ -7,6 +7,12 @@ import 'package:gunlukburc/models/home/horoscope_list_model.dart';
 import 'package:provider/provider.dart';
 
 class CommentHeader extends StatefulWidget {
+  final String pageTitle;
+  final String selectedHoroscopeKey;
+  final List<HoroscopeListModel> horoscopeListModel;
+
+  const CommentHeader({Key key, this.pageTitle, this.selectedHoroscopeKey, this.horoscopeListModel}) : super(key: key);
+
   @override
   _CommentHeaderState createState() => _CommentHeaderState();
 }
@@ -15,17 +21,29 @@ class _CommentHeaderState extends State<CommentHeader> {
 
   String pageTitle;
   String selectedHoroscopeKey;
-  int selectedHoroscopeCarouselIndex;
+  int selectedHoroscopeCarouselIndex = 0;
   List<HoroscopeListModel> horoscopeListModel;
 
   @override
-  Widget build(BuildContext context) {
-    final viewModel = Provider.of<CommentModel>(context);
+  void initState() {
+    // TODO: implement initState
+    super.initState();
 
-    setState(() {
-      this.horoscopeListModel = viewModel.horoscopes;
-      this.selectedHoroscopeKey = viewModel.selectedHoroscopeKey;
+    pageTitle = widget.pageTitle;
+    selectedHoroscopeKey = widget.selectedHoroscopeKey;
+    horoscopeListModel = widget.horoscopeListModel;
+
+    horoscopeListModel.asMap().forEach((key, value) {
+      if(selectedHoroscopeKey == value.horoscopeKey) {
+        selectedHoroscopeCarouselIndex = key;
+        pageTitle = value.name;
+      }
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
 
     return Container(
       color: Colors.black38,
@@ -61,10 +79,10 @@ class _CommentHeaderState extends State<CommentHeader> {
                   enableInfiniteScroll: false,
                   viewportFraction: 0.3,
                   onPageChanged: horoscopeCarouselPageChanged,
-                  initialPage: 1,
+                  initialPage: selectedHoroscopeCarouselIndex,
                   enlargeCenterPage: true,
                 ),
-                items: viewModel.horoscopes.map((i) {
+                items: horoscopeListModel.map((i) {
                   return Builder(
                     builder: (BuildContext context) {
                       return Container(
@@ -74,8 +92,8 @@ class _CommentHeaderState extends State<CommentHeader> {
                             children: <Widget>[
                               SvgPicture.asset(
                                 'assets/images/burc/' + i.image + '.svg',
-                                height: viewModel.selectedHoroscopeKey == i.horoscopeKey ? 120 : 84,
-                                width: viewModel.selectedHoroscopeKey == i.horoscopeKey ? 120 : 84,
+                                height: selectedHoroscopeKey == i.horoscopeKey ? 120 : 84,
+                                width: selectedHoroscopeKey == i.horoscopeKey ? 120 : 84,
                               ),
                               Text(
                                 i.name,

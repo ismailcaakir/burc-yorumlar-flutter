@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gunlukburc/commons/colors.dart';
 import 'package:gunlukburc/views/comment/components/comment_content.dart';
 
-import 'package:gunlukburc/controllers/comment/comment_controller.dart';
+// import 'package:gunlukburc/controllers/comment/comment_controller.dart';
 import 'package:gunlukburc/models/comment/comment_model.dart';
 import 'package:provider/provider.dart';
 import 'package:gunlukburc/views/comment/components/comment_date_menu_tab.dart';
@@ -18,7 +18,7 @@ class _CommentLayoutState extends State<CommentLayout> {
 
   @override
   Widget build(BuildContext context) {
-    CommentController viewController = CommentController();
+    // CommentController viewController = CommentController();
     final viewModel = Provider.of<CommentModel>(context);
 
     return Scaffold(

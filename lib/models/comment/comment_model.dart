@@ -13,13 +13,15 @@ enum CommentModelStatus {
 class CommentModel extends ChangeNotifier {
   CommentModelStatus _status;
   CommentModelStatus _commentApiStatus;
+  CommentModelStatus get status => _status;
+  CommentModelStatus get commentApiStatus => _commentApiStatus;
+
   String _errorCode;
   String _errorMessage;
 
   String get errorCode => _errorCode;
   String get errorMessage => _errorMessage;
-  CommentModelStatus get status => _status;
-  CommentModelStatus get commentApiStatus => _commentApiStatus;
+
 
   List<HoroscopeListModel> _horoscopes = [];
   List<HoroscopeListModel> get horoscopes => _horoscopes;
@@ -50,7 +52,6 @@ class CommentModel extends ChangeNotifier {
     try {
       _horoscopes = await HoroscopeListModel.fetchData(http.Client());
       _selectedHoroscopeKey = Get.arguments as String;
-      print(_selectedHoroscopeKey);
       _status = CommentModelStatus.Ended;
     } catch (e) {
       _errorMessage = e.toString();

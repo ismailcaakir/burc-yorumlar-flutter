@@ -10,7 +10,6 @@ class CommentDateMenuTab extends StatefulWidget {
 }
 
 class _CommentDateMenuTabState extends State<CommentDateMenuTab> {
-  int _pressedButtonIndex = 0;
 
   List<String> buttonType = [
     'Günlük',
